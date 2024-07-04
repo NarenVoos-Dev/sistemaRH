@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body{
+    min-height: 100%;
+}
+
+
+/*######## NAVBAR ########*/
+nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color:#233044ff;
+    box-shadow: 0 0 1px rgba(0,0,0,0.1);
+}
+
+nav .logo{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    margin: 0 24px;
+}
+
+.logo .menu-icon{
+    color: #f8f8f8;
+    font-size: 24px;
+    margin-right: 14px;
+    cursor: pointer;
+}
+
+.logo .logo-name{
+    color: #f8f8f8;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+nav .sidebar{
+    position: fixed;
+    top: 0;
+    left: -100%;
+    padding: 20px 0;
+    height: 100%;
+    width: 260px;
+    background-color: rgba(35, 48, 68, 0.932);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    transition: all 0.5s ease;
+}
+nav.open .sidebar{
+    left: 0;
+}
+.sidebar .sidebar-content{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    padding: 50px 16px;
+}
+
+.sidebar-content .list{
+    list-style: none;
+}
+
+.list .nav-link{
+    display: flex;
+    align-items: center;
+    padding: 14px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+/*stilo boton de sweet alert*/
+.swal2-styled.swal2-confirm.swalBtnColor {
+    background-color: rgba(35, 48, 68, 0.932);
+  }
+
+.list .nav-link:hover{
+    background-color: #9d40f4d7;
+}
+
+.nav-link .icon{
+    margin-right: 14px;
+    font-size: 20px;
+    color: #f8f8f8e3;
+}
+
+.nav-link .link{
+    font-size: 16px;
+    color: #f8f8f8;
+    font-weight: 400;
+}
+
+.nav-link:hover .icon,
+.nav-link:hover .link {
+    color: white;
+}
+
+.overlay{
+    position: fixed;
+    top: 0;
+    left: -100%;
+    height: 1000vh;
+    width: 200%;
+    opacity: 0;
+    background:rgba(0,0,0,0.7);
+    transition: all 0.5s ease;
+    pointer-events: none;
+}
+
+nav.open ~ .overlay{
+    opacity: 1;
+    left: 260px;
+    pointer-events: auto;
+
+}
+
+/*#### FINALIZA EL NAVBAR####*/
+body .container{
+    margin-top: 100px;
+}
+
+
+.btn-login{
+    background-color:  rgba(35, 48, 68, 0.932) !important ;
+    color: white !important;
+    font-weight: bolder !important;
+    box-shadow: 0px 2px rgba(0,0,0,0.5) !important;
+    border-radius: 20px 10px 20px 10px;
+    padding: 5px;
+    width: 150px;
+}
+
+.bg-login{
+    border-left: thin  solid rgb(206, 205, 205);
+    transition: all 0.3 ease;
+}
+#headerLogo{
+    transition: all 0.3 ease;
+}
+
+#frmLogin span{
+    background-color:  rgba(35, 48, 68, 0.795);
+    color: white;
+    border-radius: 5px 0px 0px 5px;
+    margin-right: 1px;
+}
+#frmLogin select,
+#frmLogin input{
+    background-color:  rgba(228, 228, 230, 0.445);
+    color:black;
+    border-radius: 0px 5px 5px 0px;
+    margin-right: 5px;
+}
+
+.show-password{
+    
+    justify-content: center;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(53, 53, 54, 0.952);
+    
+}
+
+h4{
+    color: rgba(35, 48, 68, 0.932) !important;
+    font-weight: 400 !important;
+}
+
+.reset-password a{
+    color:  rgba(35, 48, 68, 0.932);
+}
+
+.top-logo{
+    display: none;
+}
+
+
+i {
+    font-size:16px !important; 
+}
+.card-nomina{
+    background-color: rgba(192, 188, 188, 0.418) !important;
+    color: black;
+    font-weight: bold;
+    font-size: 13px;
+    position:static;
+}
+table{
+    border-color: black !important;
+}
+.item-admin{
+    display: none;
+}
+/*MEDIA QUERIES*/
+@media(max-width: 991px){
+    .top-logo{
+        display: block;
+    }
+}
+
+
+
+
+
