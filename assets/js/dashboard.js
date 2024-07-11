@@ -9,9 +9,7 @@ function validar(){
         data:{action:'validarSesion'},
         dataType:'json',
         success: function(response){
-            const perfil = response.profile;
-            const usuario = response.usuario;
-            TblDashboard(perfil, usuario);
+            TblDashboard(response);
         },
         error:function(){
             console.log('error de session')
@@ -19,74 +17,55 @@ function validar(){
     });
 }
 
-function TblDashboard(perfil,usuario){
+function TblDashboard(response){
     $.ajax({
         url:"../modelos/tblDashboard.php",
-        type:"GET",
+        type:"POST",
         data:{action:'TblDashboardNomina'},
         dataType:'json',
         success: function(data){
-            
+            var data = data.volantes;          
             if(data&&data.length > 0 ){
                 var FilaVolante = '';
                 $.each(data,function(index,item){
-                    if(perfil == 1){
-                        FilaVolante += PintarTblDashboardAdmin(index,item,usuario)
-                    }else{
-                        FilaVolante += PintarTblDashboard(index,item)
-                    }
+                     FilaVolante += PintarTblDashboardAdmin(index,item,response)
+                    
                 });
                 $('#tblDashboardVolantes').html(FilaVolante);
+                dataTablesNomina();
+                
             }
         }
     })
 }
 
-//Funcion pintar tabla de volantes de usuarios
-function PintarTblDashboard(index,item){
-    var NombreEmpleado = item.nombres_empleados;
-    var Identificacion = item.identificacion;
-    var id_volante = item.id_volante_pago;
-    var mes = item.id_mes;
-    var etapa = item.etapa;
-    var quincena = parseFloat(item.quincena);
-    var devengado = parseFloat(item.devengado);
-    var deducido = formatoMoneda (parseFloat(item.deduccion)); 
-    TotalDevegado = formatoMoneda (quincena+devengado);
-    if(mes.length < 2){
-        mes = '0'+ mes;
-    }
-    
-    if(etapa == 1){
-        var FechaInicial = '01/'+mes+'/'+item.año
-        var FechaFinal = '15/'+mes+'/'+item.año
-    }else{
-        var FechaInicial = '16/'+mes+'/'+item.año
-        var FechaFinal = '30/'+mes+'/'+item.año
-    }
-    $('.logo-name').html(item.empresa)
-    $('#NombreEmpleado').html(NombreEmpleado);
-    $('#identificacion').html(Identificacion);
-    let valorNeto = formatoMoneda(parseFloat(item.total_neto));
-    var FilaVolante = '';
-    FilaVolante +='<tr>';
-    FilaVolante +='<td>'+item.nombreMes+'</td>';
-    FilaVolante +='<td>'+FechaInicial+' - '+FechaFinal+'</td>';
-    FilaVolante +='<td>'+TotalDevegado+'</td>'
-    FilaVolante +='<td>'+deducido+'</td>'
-    FilaVolante +='<td> $'+valorNeto+'</td>';
-    FilaVolante +='<td>'
-    FilaVolante +='<button class="abrir-pdf btn btn-secondary" data-id="'+ id_volante +'"><i class="far fa fa-print"></i> Print</button>';
-    FilaVolante +='</td>'
-    FilaVolante +='</tr>';
-    return FilaVolante; 
+function dataTablesNomina(){
+    new DataTable('#tblDashboard',{
+        responsive: true,
+        columnDefs: [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 10001, targets: 2 },
+            { responsivePriority: 2, targets: -5 }
+        ],
+        language:{
+            url:'https://cdn.datatables.net/plug-ins/2.0.8/i18n/es-ES.json'
+        },
+        
+        layout: {
+            topStart: {
+                pageLength: {
+                    menu: [ 5, 10, 25, 50, 100 ],
+
+                }
+            },
+        }
+
+
+    });
 }
 
-
 //Funcion pintar tabla de volantes para el admin
-function PintarTblDashboardAdmin(index,item,usuario){
-    $('.item-admin').show();
-    var Identificacion = item.identificacion;
+function PintarTblDashboardAdmin(index,item,response){
     var id_volante = item.id_volante_pago;
     var mes = item.id_mes;
     var etapa = item.etapa;
@@ -94,24 +73,29 @@ function PintarTblDashboardAdmin(index,item,usuario){
     var devengado = parseFloat(item.devengado);
     var deducido = formatoMoneda (parseFloat(item.deduccion)); 
     TotalDevegado = formatoMoneda (quincena+devengado);
+    //concatenar fechas 
     if(mes.length < 2){
         mes = '0'+ mes;
-    }
-    
+    }  
     if(etapa == 1){
         var FechaInicial = '01/'+mes+'/'+item.año
         var FechaFinal = '15/'+mes+'/'+item.año
     }else{
         var FechaInicial = '16/'+mes+'/'+item.año
         var FechaFinal = '30/'+mes+'/'+item.año
+    };
+    //////////////////////
+    $('#NombreEmpleado').html(response.nombreUsuario);
+    $('#identificacion').html(response.usuario);
+    if(response.profile == 1){
+        $('#perfil').html('Super administrador');
+    }else{
+        $('#perfil').html('Usuario Estandar');
     }
-    
-    $('#NombreEmpleado').html(usuario);
-    $('#identificacion').html('Super administrador');
     let valorNeto = formatoMoneda(parseFloat(item.total_neto));
     var FilaVolante = '';
     FilaVolante +='<tr>';
-    FilaVolante +='<td>'+Identificacion+'</td>';
+    FilaVolante +='<td>'+item.nombres_empleados+'</td>';
     FilaVolante +='<td>'+item.empresa+'</td>';
     FilaVolante +='<td>'+item.nombreMes+'</td>';
     FilaVolante +='<td>'+FechaInicial+' - '+FechaFinal+'</td>';
@@ -119,10 +103,13 @@ function PintarTblDashboardAdmin(index,item,usuario){
     FilaVolante +='<td>'+deducido+'</td>'
     FilaVolante +='<td> $'+valorNeto+'</td>';
     FilaVolante +='<td>'
-    FilaVolante +='<button class="abrir-pdf btn btn-secondary m-1" data-id="'+ id_volante +'"><i class="far fa fa-print"></i></button>';
-    FilaVolante +='<button class="btn btn-danger" data-id="'+ id_volante +'"><i class="far fa fa-trash"></i></button>';
+    FilaVolante +='<button class="abrir-pdf btn btn-secondary" data-id="'+ id_volante +'"><i class="far fa fa-print"></i></button>';
+    if(response.profile == 1){
+        FilaVolante +='<button class=" btn btn-danger" data-id="'+ id_volante +'"><i class="far fa fa-trash"></i></button>';
+    }
     FilaVolante +='</td>'
     FilaVolante +='</tr>';
+
     return FilaVolante; 
 }
 

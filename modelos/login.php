@@ -7,7 +7,11 @@ function login($conn){
     $usuario = $_POST['usuario'];
     $password = $_POST['password'];
     
-    $sql = "SELECT * FROM usuarios WHERE username = ?";
+    $sql = "SELECT *, e.nombres_empleados AS nombreUsuario
+                FROM usuarios u 
+                JOIN empleados e 
+                ON u.id_empleados = e.id_empleados 
+                WHERE username = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $usuario);
     $stmt->execute();
@@ -20,6 +24,7 @@ function login($conn){
          
             $_SESSION['user_id'] = $row['id'];
             $_SESSION['empleado_id'] = $row['id_empleados'];
+            $_SESSION['nombrePefil'] =  $row['nombreUsuario'];
             $_SESSION['usuario'] = $row['username'];
             $_SESSION['profile'] = $row['profile'];
             

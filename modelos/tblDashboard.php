@@ -54,8 +54,7 @@ function TblDashboardNomina($conn){
         JOIN empresa em
         ON em.id_empresa = e.id_empresa_empleado";
     }
-
-  
+    
     $res = $conn->query($sql);
     
     if($res->num_rows > 0){
@@ -63,16 +62,16 @@ function TblDashboardNomina($conn){
         while($row = $res->fetch_assoc()){
             $Volantes_de_pago[] = $row;
         }
-        return json_encode($Volantes_de_pago);
+        return json_encode(['volantes'=> $Volantes_de_pago]);
     }else{
-        return json_encode(array());
+        return json_encode(['volantes'=> []]);
     }
 }
 // Inicia el buffer de salida para evitar salidas no deseadas
 ob_start();
 
-if (isset($_GET['action']  )) {
-    $action = $_GET['action'];
+if (isset($_POST['action']  )) {
+    $action = $_POST['action'];
     switch ($action) {
         case 'TblDashboardNomina':
                 echo TblDashboardNomina($conn);

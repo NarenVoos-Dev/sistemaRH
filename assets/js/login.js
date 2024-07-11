@@ -1,8 +1,26 @@
 $(document).ready(function() {
-    ObtenerEmpresas();
+  validarPerfil()  
+  ObtenerEmpresas();
 
 });
 
+function validarPerfil(){
+  $.ajax({
+      url:'../modelos/session.php',
+      method:'GET',
+      data:{action:'validarSesion'},
+      dataType:'json',
+      success: function(response){
+          const perfil = response.profile;
+          if(perfil){
+            window.location.href='Dashboard.php';
+          }
+      },
+      error:function(){
+          console.log('error de session')
+      }
+  });
+}
 
 $('#selectEmpresas').on('change', function(){
     let empresa = $(this).val();
@@ -18,7 +36,6 @@ $('.btn-login').on('click', function(e){
     let empresa =$('#selectEmpresas').val();
     let usuario = $('#usuario').val();
     let password = $('#passwords').val();
-    console.log(empresa,usuario,password);
     $.ajax({
         url:'../modelos/login.php',
         type: 'POST',
@@ -30,7 +47,6 @@ $('.btn-login').on('click', function(e){
         },
         success:function(response){
           const data = JSON.parse(response)
-          console.log(data)
           if(data.success){  
             let timerInterval;
             Swal.fire({
@@ -48,7 +64,7 @@ $('.btn-login').on('click', function(e){
             }).then(() =>{
               window.location.href='Dashboard.php';
             });
-
+          console.log(data)
           }else{
             Swal.fire({
               customClass:{

@@ -3,6 +3,7 @@ include_once('config.php');
 
 //CREAR VOLANTE DE NOMINA
 function GuardarVolante($conn){
+    $conn->set_charset('utf8');
     $idEmpleado = $_POST['idEmpleado'] ?? '';
     $quincena = $_POST['Quincena'] ?? '';
     $totalDevengado = $_POST['totalDevengado'] ?? '';

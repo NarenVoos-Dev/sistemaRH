@@ -11,7 +11,6 @@ body{
     min-height: 100%;
 }
 
-
 /*######## NAVBAR ########*/
 nav{
     position: fixed;
@@ -23,6 +22,7 @@ nav{
     align-items: center;
     background-color:#233044ff;
     box-shadow: 0 0 1px rgba(0,0,0,0.1);
+    z-index: 1030;
 }
 
 nav .logo{
@@ -48,7 +48,7 @@ nav .logo{
 nav .sidebar{
     position: fixed;
     top: 0;
-    left: -100%;
+    left:-100%;
     padding: 20px 0;
     height: 100%;
     width: 260px;
@@ -198,17 +198,60 @@ i {
 table{
     border-color: black !important;
 }
-.item-admin{
-    display: none;
-}
-/*MEDIA QUERIES*/
+
+.table th, .table td {
+    font-size: 0.875rem;
+  }
+
+
+/*MEDIA QUERIES
 @media(max-width: 991px){
     .top-logo{
         display: block;
     }
+
+    .header-dashboard{
+        font-size: 14px;
+    }
+}*/
+
+
+/* Estilos para pantallas móviles y tablets */
+@media (max-width: 768px) {
+
+    body{
+        max-height: 100vh;
+        max-width: 100vh;
+    }
+    nav .sidebar{
+        width: 100%;
+        box-shadow: 0;
+    }
+    .sidebar .sidebar-content{
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        justify-content: flex-start;
+        padding: 50px;
+    
+    }
+    .overlay{
+        display: none;
+    }
+
+    h1, h2, h3 {
+        font-weight: 700 !important;
+        font-size: 20px !important;
+    }
+    p {
+        font-size: 14px !important;
+    }
+
+
+  }
+
+/* Estilos para tablets y pantallas mas grandes*/
+@media (min-width: 768px) and (max-width: 1024px) {
+
 }
-
-
-
-
 

@@ -6,7 +6,8 @@ function validarSesion($conn){
     header('Content-Type: application/json');
     $response = [
         'profile' => isset($_SESSION['profile']) ? $_SESSION['profile'] : '',
-        'usuario' => isset($_SESSION['usuario']) ? $_SESSION['usuario'] : ''
+        'usuario' => isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '',
+        'nombreUsuario' => isset($_SESSION['nombrePefil']) ? $_SESSION['nombrePefil'] : ''
     ];
     echo json_encode($response);
 
