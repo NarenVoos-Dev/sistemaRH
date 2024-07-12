@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulario de Contrato</title>
+    <style>
+        /* Estilo básico para el campo de búsqueda y la lista */
+        #person-list {
+            border: 1px solid #ccc;
+            max-height: 100px;
+            overflow-y: auto;
+            display: none;
+        }
+        .person-item {
+            padding: 8px;
+            cursor: pointer;
+        }
+        .person-item:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <form id="contract-form">
+        <label for="document">Documento:</label>
+        <input type="text" id="document" name="document" oninput="filterNames()" autocomplete="off">
+        <div id="person-list"></div>
+        <br><br>
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" readonly>
+        <br><br>
+        <!-- Otros campos del formulario -->
+        <button type="submit">Crear Contrato</button>
+    </form>
+
+    <script>
+        const people = [
+    {document: '1234567890', name: 'Juan Pérez'},
+    {document: '112234567', name: 'María López'},
+    {document: '3456789012', name: 'Carlos Sánchez'},
+    // Añade más personas aquí
+];
+
+function filterNames() {
+    const input = document.getElementById('document').value;
+    const list = document.getElementById('person-list');
+    list.innerHTML = '';
+    if (input === '') {
+        list.style.display = 'none';
+        return;
+    }
+    
+    const filteredPeople = people.filter(person => person.document.startsWith(input));
+    if (filteredPeople.length === 0) {
+        list.style.display = 'none';
+        return;
+    }
+    
+    filteredPeople.forEach(person => {
+        const item = document.createElement('div');
+        item.className = 'person-item';
+        item.textContent = `${person.document} - ${person.name}`;
+        item.onclick = () => selectPerson(person);
+        list.appendChild(item);
+    });
+    list.style.display = 'block';
+}
+
+function selectPerson(person) {
+    document.getElementById('document').value = person.document;
+    document.getElementById('name').value = person.name;
+    document.getElementById('person-list').style.display = 'none';
+}
+
+    </script>
+</body>
+</html>
