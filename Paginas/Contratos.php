@@ -77,11 +77,7 @@ if(!isset($_SESSION["profile"])){
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <p>En caso de aplicar auxilios:</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
+                            <p>En caso de aplicar auxilios:</p>
                             <div class="form-group">
                                 <label for="campo5">TIPO DE AUXILIO</label>
                                 <!--Numero de identificacion --->
@@ -131,6 +127,12 @@ if(!isset($_SESSION["profile"])){
                                 <label for="campo5">NUEVA FECHA </label>
                                 <!--Salario empleado --->
                                 <input type="date" class="form-control" id="salarioEmpleado" name="EPS">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="formFileMultiple" class="form-label">CARGA DOCUMENTOS DEL EMPLEADO</label>
+                                <input class="form-control" type="file" id="formFileMultiple" multiple>
                             </div>
                         </div>
                        <input type="text" class="form-control" id="idPaciente" name="idPaciente" style="display:none;">

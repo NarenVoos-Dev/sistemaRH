@@ -25,6 +25,7 @@ nav{
     z-index: 1030;
 }
 
+
 nav .logo{
     position: fixed;
     display: flex;
@@ -124,9 +125,16 @@ nav.open ~ .overlay{
 }
 
 /*#### FINALIZA EL NAVBAR####*/
+body{
+    background-color: rgba(241, 241, 241, 0.438) !important;
+}
+
 body .container{
     margin-top: 100px;
+    
 }
+
+
 
 
 .btn-login{
@@ -206,13 +214,7 @@ table{
 
 /*MEDIA QUERIES
 @media(max-width: 991px){
-    .top-logo{
-        display: block;
-    }
 
-    .header-dashboard{
-        font-size: 14px;
-    }
 }*/
 
 
@@ -246,7 +248,36 @@ table{
     p {
         font-size: 14px !important;
     }
+    .top-logo{
+        display: block;
+    }
 
+    .header-dashboard{
+        font-size: 14px;
+    }
+
+    #frmLogin #usuario,
+    #selectEmpresas,
+    #passwords::placeholder{
+        font-size: 0.7rem;
+    } 
+
+    #frmLogin .show-password label{
+        font-size: 0.8rem;
+    }
+
+  }
+
+  @media (max-width: 390px) {
+    #frmLogin #usuario,
+    #selectEmpresas,
+    #passwords::placeholder{
+        font-size: 0.6rem;
+    } 
+
+    #frmLogin .show-password label{
+        font-size: 0.7rem;
+    }
 
   }
 

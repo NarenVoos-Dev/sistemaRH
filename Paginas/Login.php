@@ -32,7 +32,7 @@ if(isset($_SESSION["profile"])){
 
 </head>
 
-<body class="bg-gradient-gespac">
+<body>
 
     <div class="container">
 
@@ -45,8 +45,8 @@ if(isset($_SESSION["profile"])){
                     <div class="card-body p-5">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 ">
-                                <div class="p-5">
+                            <div class="col-lg-6">
+                                <div class="card-login p-5">
                                     <div class="text-center" id="frmLogin">
                                         <div class="col-lg-6 d-lg-block d-flex justify-content-center">
                                             <img src="" alt="" id="headerLogo" class="py-3 top-logo" width="100"
@@ -74,7 +74,7 @@ if(isset($_SESSION["profile"])){
                                         <div class="mb-3 show-password">
                                             <div class="col d-flex ">
                                                 <input type="checkbox" name="show-pass" id="show-pass">
-                                                Mostrar contraseña
+                                                <label for="show-pass">Mostrar contraseña</label>
                                             </div>
                                         </div>
                                         <div class="mb-4">

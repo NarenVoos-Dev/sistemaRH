@@ -23,6 +23,12 @@
                     </a>
                 </li>
                 <li class="list super-admin">
+                    <a href="Contratos.php" class="nav-link">
+                        <i class="fa-regular fa fa-handshake icon"></i>
+                        <span class="link">Contrataciones</span>
+                    </a>
+                </li>
+                <li class="list super-admin">
                     <a href="VolanteNomina.php" class="nav-link">
                         <i class="far fa fa-file icon"></i>
                         <span class="link">Crear nomina</span>
@@ -32,6 +38,12 @@
                     <a href="#" class="nav-link">
                         <i class="far fa fa-file-download icon"></i>
                         <span class="link">Certificados</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="#" class="nav-link">
+                        <i class="far fa fa-hand-holding-usd icon"></i>
+                        <span class="link">Creditos</span>
                     </a>
                 </li>
             </ul>
